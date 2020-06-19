@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-export class Dashboard extends Component {
+export class error extends Component {
     render() {
         return (
             <div>
-                Dashboard
+                404
             </div>
         )
     }
 }
 
-export default Dashboard
+export default error
