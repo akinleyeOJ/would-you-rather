@@ -5,7 +5,7 @@ export class Dashboard extends Component {
   render() {
     return (
       
-      <div className="ui fixed inverted menu">
+      <div className="ui fixed inverted menu green">
      <div className="ui container " >
          
       <NavLink to="/"
