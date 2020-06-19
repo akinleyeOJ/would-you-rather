@@ -34,13 +34,15 @@ class App extends Component {
       <Fragment>
          <NavBar/>
          <Dashboard/>
-         
+         <Switch>
+         <Route exact path="/" component={Dashboard} />
          <Route path="/question" component={Question} />
          <Route path="/newquestion" component={NewQuestion} />
          <Route path="/leaderboard" component={LeaderBoard} />
          <Route path="/error" component={error} />
          <Route path="/questions/:question_id" component={QuestionDetail} />
-         <Redirect to="/" />
+         
+         </Switch>
       </Fragment>
       )}
       </div>
