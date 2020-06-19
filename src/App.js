@@ -3,7 +3,6 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import {connect} from "react-redux";
 import './App.css';
 
-
 import LeaderBoard from "./components/LeaderBoard";
 import NavBar from "./components/Navbar";
 import Login from "./components/Login";
@@ -19,6 +18,7 @@ class App extends Component {
     <BrowserRouter>
       <Fragment>
          <NavBar/>
+         <Dashboard/>
          <Route path="/login" component={Login} /> 
          <Route path="/question" component={Question} />
          <Route path="/newquestion" component={NewQuestion} />
