@@ -1,5 +1,4 @@
-import { LOAD_QUESTIONS} from '../actions/questions';
-import { ADD_QUESTION_ANSWER, ADD_QUESTION } from "../actions/shared";
+import { LOAD_QUESTIONS, ADD_QUESTION_ANSWER, ADD_QUESTION} from '../actions/questions';
   
   export default function questions(state = {}, action) {
     switch (action.type) {

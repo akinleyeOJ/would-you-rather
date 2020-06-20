@@ -5,7 +5,7 @@ import {setAuthedUser} from '../actions/authedUser';
 
 export class Logout extends Component {
     componentDidMount() {
-        this.props.dispatch(setAuthedUser(null));
+        this.props.setAuthedUser(null);
     }
 
     render() {

@@ -6,10 +6,30 @@ export const getUsers = (users) => {
   return { type: GET_USERS, users,};
 }
 
-export const userAddQuestion = (users) => {
-  return { type: USER_ADD_QUESTION, users,};
+function userAddQuestion (question){
+  return{
+    type: USER_ADD_QUESTION,
+    question,
+  }
 }
 
-export const userAnswerQuestion = (users) => {
-  return { type: USER_ANSWER_QUESTION, users,};
+export function handleUserAddQuestion (info) {
+  return (dispatch) => {
+    dispatch(userAddQuestion(info))
+  }
+}
+
+function userAnswerQuestion (authedUser, qid, answer){
+  return{
+    type: USER_ANSWER_QUESTION,
+    authedUser,
+    qid,
+    answer,
+  }
+}
+
+export function handleUserAnswerQuestion (authedUser, qid, answer) {
+  return (dispatch) => {
+    dispatch(userAnswerQuestion(authedUser, qid, answer))
+  }
 }
