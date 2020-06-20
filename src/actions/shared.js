@@ -14,6 +14,7 @@ export const handleInitialData = () => {
         dispatch(getUsers(users))
         dispatch(loadQuestions(questions))
         dispatch(hideLoading())
+        dispatch(setAuthedUser("sarahedo"));
       })
   }
 }
