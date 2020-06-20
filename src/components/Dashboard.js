@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom';
+import {connect} from "react-redux"
 
 export class Dashboard extends Component {
   render() {
+    const {users, authedUser } = this.props;
+    const {name, avatarURL } = users[authedUser];    
     return (
       
       <div className="ui fixed inverted menu green">
@@ -22,16 +25,24 @@ export class Dashboard extends Component {
             exact
             className="item"
             activeClassName="active" > Leader Board </NavLink>
-          
-          <NavLink to="/login"
+          <div clasName="ui right floated item">
+            <span style={{ marginRight: "20px"}}>Hi, {name}</span>
+          <img className="ui avatar image" src={avatarURL} alt="">
+          </img>
+           </div>
+          <NavLink to="/logout"
             exact
             className="ui right floated item"
-            activeClassName="active" > Login </NavLink>
+             > Logout </NavLink>
         </div>
       </div>
     );
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => {
+  return  {authedUser: state.authedUser, users: state.users};
+}
+
+export default connect(mapStateToProps)(Dashboard);
 
