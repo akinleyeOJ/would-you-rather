@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
-import { Dropdown} from "semantic-ui-react";
+import { Dropdown, Form} from "semantic-ui-react";
 import { setAuthedUser } from '../actions/authedUser'
+
 
 class Login extends Component {
   state = {
     userSelected: 'select',
     toHome: false,
-  }
+    message: {hidden: true, content: ""}
+  };
   referrer = null;
-
+ 
   componentDidMount() {
     const {
       history,
@@ -19,43 +21,29 @@ class Login extends Component {
     this.referrer = pathname;
     history.push("/login");
   }
-
-  handleUserSelection = (event, data) => {
-    this.setState({ userSelected: data.value });
+  state = {
+    value: ''
   };
 
-  handleUserLogin = () => {
-    const { history } = this.props;
-    if (!this.state.userSelected) {
-      this.setState({
-        message: {
-          hidden: false,
-          content: "Please select a user"
-        }
-      });
-      return;
-    } else {
-      this.setState({
-        message: {
-          hidden: true,
-          content: ""
-        }
-      });
-    }
+  onChange = (e, { value }) => {this.setState({ value });};
 
-    this.props.setAuthedUser(this.state.userSelected);
-    if ( this.referrer === "/login") {
-      history.push("/");
-    } else {
-      history.push(this.referrer);
-    }
+   handleSubmit = e => {
+    e.preventDefault();
+    const { setAuthedUser } = this.props;
+    const authedUser = this.state.value;
+
+    new Promise((res, rej) => {
+     
+      setTimeout(() => res(), 500);
+    }).then(() => setAuthedUser(authedUser));
   };
+
 
   render() {
   const {users} = this.props;
-  if(!users) {
-  return;  
-}
+  const { value } = this.state;
+  const disabled = value === '' ? true : false;
+ 
     
     const userOptions = Object.keys(users).map(userId => ({
         key: userId,
@@ -63,16 +51,17 @@ class Login extends Component {
         text: users[userId].name,
         image: { avatar: true, src: users[userId].avatarURL }
       }));
-  
+     
+ 
       return (
         <div>
         <div className="ui container">
           <div className="ui middle  aligned center aligned grid">
             <div className="column" style={{ width: "450px", marginTop: "5em" }}>
               <h2 className="ui image header green">
-                <div className="content">Please Sign In To Proceed</div>
+                <div className="content">Please Login In To Proceed</div>
               </h2>
-              <form className="ui large form">
+              <form onSubmit={this.handleSubmit} className="ui large form">
                 <div className="ui raised segment">
                   <div className="field">
                     <Dropdown
@@ -81,12 +70,10 @@ class Login extends Component {
                       selection
                       scrolling
                       options={userOptions}
-                      onChange={this.handleUserSelection}
+                      onChange={this.onChange}
                     />
                   </div>
-                  <div className="ui fluid green submit button"
-                    onClick={this.handleUserLogin} > Login
-                  </div>
+                  <Form.Button content="Login" disabled={disabled} fluid />
                 </div>
               </form>
             </div>

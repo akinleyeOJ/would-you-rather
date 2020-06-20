@@ -6,6 +6,7 @@ import { handleInitialData } from "../src/actions/shared";
 import LeaderBoard from "./components/LeaderBoard";
 import NavBar from "./components/Navbar";
 import Login from "./components/Login";
+import Logout from "./components/Logout";
 import Question from "./components/Question";
 import NewQuestion from "./components/NewQuestion";
 import error from "./components/error";
@@ -38,6 +39,7 @@ class App extends Component {
          <Route exact path="/" component={Dashboard} />
          <Route path="/question" component={Question} />
          <Route path="/newquestion" component={NewQuestion} />
+         <Route path="/logout" component={Logout}/>
          <Route path="/leaderboard" component={LeaderBoard} />
          <Route path="/error" component={error} />
          <Route path="/questions/:question_id" component={QuestionDetail} />
