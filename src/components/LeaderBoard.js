@@ -27,7 +27,7 @@ class LeaderBoard extends Component {
                         const createdQuestions =  questions.length
                         const score = numAnswered + createdQuestions;
                         return(
-                       
+                       <Card.Group centered>
                        <Card floated=""right>
                         <List.Item key={id}>
                         <Image avatar src={avatarURL} />
@@ -42,6 +42,7 @@ class LeaderBoard extends Component {
                              </List.Content>
                          </List.Item>
                          </Card>
+                         </Card.Group>
                      ) })}
                                 </List>
           
