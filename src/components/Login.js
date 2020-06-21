@@ -19,7 +19,7 @@ class Login extends Component {
       location: { pathname }
     } = this.props;
     this.referrer = pathname;
-    history.push("/login");
+    history.push("/");
   }
   state = {
     value: ''
@@ -58,7 +58,7 @@ class Login extends Component {
         <div className="ui container">
           <div className="ui middle  aligned center aligned grid">
             <div className="column" style={{ width: "450px", marginTop: "5em" }}>
-              <h2 className="ui image header green">
+              <h2 className="ui image header red">
                 <div className="content">Please Login In To Proceed</div>
               </h2>
               <form onSubmit={this.handleSubmit} className="ui large form">
@@ -73,7 +73,7 @@ class Login extends Component {
                       onChange={this.onChange}
                     />
                   </div>
-                  <Form.Button content="Login" disabled={disabled} fluid />
+                  <Form.Button content="Login" negative disabled={disabled} fluid />
                 </div>
               </form>
             </div>

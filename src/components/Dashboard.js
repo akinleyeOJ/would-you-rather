@@ -8,7 +8,7 @@ export class Dashboard extends Component {
     const {name, avatarURL } = users[authedUser];    
     return (
       
-      <div className="ui fixed inverted menu green">
+      <div className="ui fixed inverted menu red">
      <div className="ui container " >
          
       <NavLink to="/"
@@ -16,7 +16,7 @@ export class Dashboard extends Component {
             className="header item"
             activeClassName="active" > Home </NavLink>
           
-          <NavLink to="/newpoll"
+          <NavLink to="/newQuestion"
             exact
             className="item"
             activeClassName="active" > New Poll </NavLink>
@@ -25,10 +25,9 @@ export class Dashboard extends Component {
             exact
             className="item"
             activeClassName="active" > Leader Board </NavLink>
-          <div clasName="ui right floated item">
-            <span style={{ marginRight: "20px"}}>Hi, {name}</span>
-          <img className="ui avatar image" src={avatarURL} alt="">
-          </img>
+          <div className="ui right floated item">
+            Hi, {name}
+          <img className="ui avatar image" src={avatarURL} alt=""></img>
            </div>
           <NavLink to="/logout"
             exact
