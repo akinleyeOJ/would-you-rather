@@ -38,7 +38,7 @@ class LeaderBoard extends Component {
                                     {`${questions.length} questions asked & ${numAnswered} questions answered `}
 
                                     </List.Description>
-                                    <Label circular color={"red"}>{`Score = ${score}`}</Label>
+                                    <Label circular color={"red"}>{`Points = ${score}`}</Label>
                              </List.Content>
                          </List.Item>
                          </Card>
