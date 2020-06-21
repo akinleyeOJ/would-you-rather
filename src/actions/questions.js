@@ -1,53 +1,57 @@
-import {saveQuestionAnswer, saveQuestion} from "../datas/api"
-import {handleUserAddQuestion, handleUserAnswerQuestion} from "../actions/users";
+import { saveQuestionAnswer, saveQuestion } from "../utils/api";
+import { userAddedQuestion, userAnsweredQuestion } from "./users";
+import { showLoading, hideLoading } from "react-redux-loading-bar";
 
-export const LOAD_QUESTIONS = 'LOAD_QUESTIONS'
-export const ADD_QUESTION = 'ADD_QUESTION'
-export const ADD_QUESTION_ANSWER = 'ADD_QUESTION_ANSWER'
+export const LOAD_QUESTIONS = "LOAD_QUESTIONS";
+export const ANSWER_QUESTION = "ANSWER_QUESTION";
+export const ADD_QUESTION = "ADD_QUESTION";
 
-function addQuestion (question) {
+export function loadQuestions(questions) {
+  return { type: LOAD_QUESTIONS, questions };
+}
+
+//-- answer question
+
+function answerQuestion({ authedUser, qid, answer }) {
+  return {
+    type: ANSWER_QUESTION,
+    authedUser,
+    qid,
+    answer
+  };
+}
+
+export function handleAnswerQuestion({ authedUser, qid, answer }) {
+  return dispatch => {
+    dispatch(showLoading());
+
+    return saveQuestionAnswer({ authedUser, qid, answer }).then(() => {
+      dispatch(answerQuestion({ authedUser, qid, answer }));
+      dispatch(userAnsweredQuestion({ authedUser, qid, answer }));
+      dispatch(hideLoading());
+    });
+  };
+}
+
+//-- add question
+
+function addQuestion({ question }) {
   return {
     type: ADD_QUESTION,
-    question,
-  }
+    question
+  };
 }
 
-export function handleAddQuestion (optionOneText, optionTwoText, author) {
-  return (dispatch) => {
-return saveQuestion({optionOneText, optionTwoText, author })
-      .then((question) => {
-        dispatch(addQuestion(question))
-        dispatch(handleUserAddQuestion(question))
-      })
-  }
-}
+export function handleAddQuestion({ optionOneText, optionTwoText, author }) {
+  return dispatch => {
+    dispatch(showLoading());
 
-export function loadQuestions (questions) {
-  return {
-    type: LOAD_QUESTIONS,
-    questions,
-  }
-}
-
-function addQuestionAnswer (authedUser, qid, answer) {
-  return {
-    type: ADD_QUESTION_ANSWER,
-    authedUser, 
-    qid, 
-    answer
-  }
-}
-
-export function handleAnswerQuestion (authedUser, qid, answer ) {
-  return (dispatch) => {
-    return saveQuestionAnswer({
-      qid, 
-      authedUser, 
-      answer
-    })
-    .then(({authedUser, qid, answer}) => {
-      dispatch(addQuestionAnswer(authedUser, qid, answer))
-      dispatch(handleUserAnswerQuestion(authedUser, qid, answer))
-    })
-  }
+    return saveQuestion({ optionOneText, optionTwoText, author }).then(
+      question => {
+        dispatch(userAddedQuestion({ authedUser: author, qid: question.id }));
+        dispatch(addQuestion({ question }));
+        dispatch(hideLoading());
+      }
+    );
+  };
 }

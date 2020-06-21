@@ -14,10 +14,12 @@ import "semantic-ui-css/semantic.min.css";
 const store = createStore(reducer, middleware);
 
 ReactDOM.render(
+  <React.StrictMode>
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById("root")
+  </Provider>
+  </React.StrictMode>,
+   document.getElementById("root")
 );
 
 

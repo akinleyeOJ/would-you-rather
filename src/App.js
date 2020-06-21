@@ -12,10 +12,10 @@ import NewQuestion from "./components/NewQuestion";
 import error from "./components/error";
 import QuestionDetail from "./components/QuestionDetail";
 import Dashboard from "./components/Dashboard";
-
+import RequiresAuth from './components/RequiresAuth'
 
 class App extends Component {
-  
+  state= {activeIndex: 0}
     componentDidMount() {
       const {handleInitialData
     }
@@ -23,6 +23,12 @@ class App extends Component {
     handleInitialData();
   }
 
+  handleTabChange = (e, { activeIndex }) => {
+    this.setState({activeIndex});
+  }
+
+  resetActiveIndexToZero = () => { this.setState({ activeIndex: 0});
+}
   render() {
     const { authedUser } = this.props;
 
@@ -33,18 +39,37 @@ class App extends Component {
         <Route path="/" component={Login} />
       ) : (
       <Fragment>
-         <NavBar/>
+       
          <Dashboard/>
+         <div className="ui main text container" style={{marginTop: "80px"}}>
          <Switch>
-         <Route exact path="/" component={Dashboard} />
-         <Route path="/question" component={Question} />
-         <Route path="/newquestion" component={NewQuestion} />
+         <Route path="/" exact render={() => {
+           return( 
+           <Question
+            handleTabChange={this.handleTabChange}
+            activeIndex={this.state.activeIndex}
+            />
+           );
+         }}
+         />
+          <Route
+                path="/newQuestion"
+                render={history => {
+                  return (
+                    <NewQuestion
+                      resetActiveIndexToZero={this.resetActiveIndexToZero}
+                      history={history.history}
+                    />
+                  );
+                }}
+              />
          <Route path="/logout" component={Logout}/>
          <Route path="/leaderboard" component={LeaderBoard} />
-         <Route path="/error" component={error} />
-         <Route path="/questions/:question_id" component={QuestionDetail} />
+         <Route path="/error404" component={error} />
+         <Route path="/questions/:question_id" component={RequiresAuth(QuestionDetail)} />
          
          </Switch>
+         </div>
       </Fragment>
       )}
       </div>
