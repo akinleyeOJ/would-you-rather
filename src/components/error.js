@@ -1,13 +1,20 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { withRouter} from 'react-router-dom';
 
-export class error extends Component {
-    render() {
+function error(props) {
         return (
             <div>
-                404
+            <div>
+               <h3 className="center">404/ Page not found</h3>
+            </div>
+            <div>
+                <button onClick={() => props.history.push('/')}>
+                Go back to Login Page
+                </button>
+            </div>
             </div>
         )
     }
-}
 
-export default error
+
+export default withRouter(error)
