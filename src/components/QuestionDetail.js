@@ -57,7 +57,7 @@ class QuestionDetail extends Component {
         return (
             <Card key={qid} style={{ width: '400px'}}>
                 <Card.Content>
-                    <Image floated='right' size='tiny' src={user.avatarURL} />
+                    <Image size='tiny' src={user.avatarURL} />
                     <Card.Header>{user.name} asks</Card.Header>
                     <div>Would you rather</div>
                     <Card.Description>

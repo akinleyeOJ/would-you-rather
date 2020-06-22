@@ -65,9 +65,11 @@ class App extends Component {
               />
          <Route path="/logout" component={Logout}/>
          <Route path="/leaderboard" component={LeaderBoard} />
+        
+         
+         <Route path="/questions/:question_id" component={QuestionDetail} />
          <Route path="/error404" component={error} />
          <Route path="/" component={error} />
-         <Route path="/questions/:question_id" component={RequiresAuth(QuestionDetail)} />
          
          </Switch>
          </div>
