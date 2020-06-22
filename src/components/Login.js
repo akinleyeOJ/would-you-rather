@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router'
-import { Dropdown, Form} from "semantic-ui-react";
+import { Dropdown, Form, Message} from "semantic-ui-react";
 import { setAuthedUser } from '../actions/authedUser'
 
 
@@ -90,6 +90,7 @@ class Login extends Component {
                       onChange={this.handleUserSelection}
                     />
                   </div>
+                  <Message red style={{ color: "Red"},{floated: "centered"}}> Please Login To See Questions</Message>
                   <Form.Button onClick={this.handleUserLogin} content="Login" negative fluid />
                 </div>
               </form>
