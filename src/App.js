@@ -53,7 +53,7 @@ class App extends Component {
          }}
          />
           <Route
-                path="/newQuestion"
+                path="/add"
                 render={history => {
                   return (
                     <NewQuestion
@@ -66,6 +66,7 @@ class App extends Component {
          <Route path="/logout" component={Logout}/>
          <Route path="/leaderboard" component={LeaderBoard} />
          <Route path="/error404" component={error} />
+         <Route path="/" component={error} />
          <Route path="/questions/:question_id" component={RequiresAuth(QuestionDetail)} />
          
          </Switch>

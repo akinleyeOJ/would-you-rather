@@ -16,7 +16,7 @@ export class Dashboard extends Component {
             className="header item"
             activeClassName="active" > Home </NavLink>
           
-          <NavLink to="/newQuestion"
+          <NavLink to="/add"
             exact
             className="item"
             activeClassName="active" > New Poll </NavLink>

@@ -9,7 +9,7 @@ function error(props) {
             </div>
             <div>
                 <button onClick={() => props.history.push('/')}>
-                Go back to Login Page
+                Go back Home
                 </button>
             </div>
             </div>
