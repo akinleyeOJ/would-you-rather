@@ -25,34 +25,51 @@ class Login extends Component {
     value: ''
   };
 
-  onChange = (e, { value }) => {this.setState({ value });};
-
-   handleSubmit = e => {
-    e.preventDefault();
-    const { setAuthedUser } = this.props;
-    const authedUser = this.state.value;
-
-    new Promise((res, rej) => {
-     
-      setTimeout(() => res(), 500);
-    }).then(() => setAuthedUser(authedUser));
+  handleUserSelection = (event, data) => {
+    this.setState({ selectedUser: data.value });
   };
 
+  handleUserLogin = () => {
+    const { history } = this.props;
+    if (!this.state.selectedUser) {
+      this.setState({
+        message: {
+          hidden: false,
+          content: "Please select a user"
+        }
+      });
+      return;
+    } else {
+      this.setState({
+        message: {
+          hidden: true,
+          content: ""
+        }
+      });
+    }
+
+    this.props.setAuthedUser(this.state.selectedUser);
+    if (this.referrer === "/logout" || this.referrer === "/login") {
+      history.push("/");
+    } else {
+      history.push(this.referrer);
+    }
+  };
 
   render() {
-  const {users} = this.props;
-  const { value } = this.state;
-  const disabled = value === '' ? true : false;
- 
-    
+    const { users } = this.props;
+    if (!users) {
+      return;
+    }
+
     const userOptions = Object.keys(users).map(userId => ({
-        key: userId,
-        value: userId,
-        text: users[userId].name,
-        image: { avatar: true, src: users[userId].avatarURL }
-      }));
-     
- 
+      key: userId,
+      value: userId,
+      text: users[userId].name,
+      image: { avatar: true, src: users[userId].avatarURL }
+    }));
+
+    const { message } = this.state;
       return (
         <div>
         <div className="ui container">
@@ -61,7 +78,7 @@ class Login extends Component {
               <h2 className="ui image header red">
                 <div className="content">Please Login In To Proceed</div>
               </h2>
-              <form onSubmit={this.handleSubmit} className="ui large form">
+              <form className="ui large form">
                 <div className="ui raised segment">
                   <div className="field">
                     <Dropdown
@@ -70,10 +87,10 @@ class Login extends Component {
                       selection
                       scrolling
                       options={userOptions}
-                      onChange={this.onChange}
+                      onChange={this.handleUserSelection}
                     />
                   </div>
-                  <Form.Button content="Login" negative disabled={disabled} fluid />
+                  <Form.Button onClick={this.handleUserLogin} content="Login" negative fluid />
                 </div>
               </form>
             </div>
