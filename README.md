@@ -1,7 +1,7 @@
 # would you rather
  
 # Project Overview
-In the "Would You Rather?" Project, you'll build a web app that lets a user play the “Would You Rather?” game. The game goes like this: A user is asked a question in the form: “Would you rather [option A] or [option B] ?”. Answering "neither" or "both" is against the rules.
+In the "Would You Rather?" Project, the application will display a simple log in form where the user only need to select one of the existing user and click the Log In button to continue to the app.
 
 In your app, users will be able to answer questions, see which questions they haven’t answered, see how other people have voted, post questions, and see the ranking of users on the leaderboard.
 
