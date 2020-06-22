@@ -4,7 +4,6 @@ import {connect} from "react-redux";
 import './App.css';
 import { handleInitialData } from "../src/actions/shared";
 import LeaderBoard from "./components/LeaderBoard";
-import NavBar from "./components/Navbar";
 import Login from "./components/Login";
 import Logout from "./components/Logout";
 import Question from "./components/Question";
@@ -12,7 +11,6 @@ import NewQuestion from "./components/NewQuestion";
 import error from "./components/error";
 import QuestionDetail from "./components/QuestionDetail";
 import Dashboard from "./components/Dashboard";
-import RequiresAuth from './components/RequiresAuth'
 
 class App extends Component {
   state= {activeIndex: 0}
